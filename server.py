@@ -15,7 +15,6 @@ Session = sessionmaker(bind=engine, autoflush=False)
 
 @Pyro5.api.expose
 class Server:
-
     session = None
 
     def cadastrar_perfil(self, experiencia_dict, formacao_dict, habilidade_dict, pessoa_dict):
@@ -43,10 +42,11 @@ class Server:
         except Exception as e:
             print(e)
 
-    def pessoas_por_formacao(self, curso):
-        pessoas = DAO.buscar_todos_por_join(session=self.session, table1=Pessoa, table2=Formacao, order_by=Pessoa.nome,
-                                            nome=curso)
-        return pessoas
+    def pessoas_por_formacao(self, formacao):
+        # pessoas = DAO.buscar_todos_por_join(session=self.session, table1=Pessoa, table2=Formacao, order_by=Pessoa.nome,
+        #                                     nome=curso)
+        pessoas = self.session.query(Pessoa, Formacao).filter(Formacao.nome == formacao['nome']).all()
+        print(pessoas)
 
     def listar_pessoas(self):
         pessoas = DAO.buscar_todos(self.session, Pessoa)
