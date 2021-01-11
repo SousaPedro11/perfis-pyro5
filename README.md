@@ -12,7 +12,7 @@ Projeto que implementa um RMI para cadastro de perfis implementado com Pyro5
     ```
 * criar o abiente virtual
   * verificar e se preciso alterar para 3.8 a versão do Python no arquivo [Pipfile](Pipfile)
-  * criar o ambiente com: ```pipenv --treee```
+  * criar o ambiente com: ```pipenv --three```
 * instalar dependências
   * entrar no shell do pipenv: ```pipenv shell```
   * instalar dependencias com: ```pipenv install```
