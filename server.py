@@ -45,7 +45,7 @@ class Server:
 
     def pessoas_por_formacao(self, curso):
         pessoas = DAO.buscar_todos_por_join(session=self.session, table1=Pessoa, table2=Formacao, order_by=Pessoa.nome,
-                                            Formacao__nome=curso)
+                                            nome=curso)
         return pessoas
 
     def listar_pessoas(self):
