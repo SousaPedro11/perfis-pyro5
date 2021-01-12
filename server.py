@@ -32,7 +32,6 @@ class Server:
                 habilidade = Habilidade(**habilidade_dict)
             if pessoa is None:
                 pessoa = Pessoa(**pessoa_dict)
-
             pessoa.nome = pessoa_dict['nome']
             pessoa.sobrenome = pessoa_dict['sobrenome']
             pessoa.residencia = pessoa_dict['residencia']
@@ -48,9 +47,9 @@ class Server:
     def pessoas_por_formacao(self, formacao):
         query = self.session.query(Formacao).join(Pessoa, Formacao.pessoas).filter(
             Formacao.nome == formacao['nome']).first()
-        result = None
-        if Formacao is not None:
-            result = '\n'.join([e.__repr__() for e in query.pessoas])
+        if query is None:
+            return 'Formacao não encontrada'
+        result = '\n'.join([e.__repr__() for e in query.pessoas])
         return f'PESSOAS DO CURSO {formacao["nome"]}\n{result}'
 
     def pessoas_por_cidade(self, cidade):
